@@ -1,8 +1,14 @@
 #include <Ultrasonic.h>
 
+const int soundPin = 6;
 int triggerPin =  AN1;
 int echoPin =     AN0;
 Ultrasonic ultrasonic(triggerPin, echoPin, BUSA);
+
+int readingValue;
+int frequency;
+
+
 
 void setup()
   {
@@ -12,7 +18,7 @@ void setup()
 void loop()
   {
   float cmMsec, inMsec;
-  long microsec = ultrasonic.timing(15, Ultrasonic::IN);
+  long microsec = ultrasonic.timing(500, Ultrasonic::IN);
 
   cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
   inMsec = ultrasonic.convert(microsec, Ultrasonic::IN);
@@ -22,5 +28,12 @@ void loop()
   Serial.print(cmMsec);
   Serial.print(", IN: ");
   Serial.println(inMsec);
-  delay(1000);
+  delay(100);
+
+  readingValue = analogRead(microsec);
+
+  tone(soundPin, readingValue);
+  
+
+  
   }
