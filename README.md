@@ -24,13 +24,13 @@ The libraries that are necessary are the following:
 
 List of Materials needed
 
-2x HC-SR04 Virtuabotix Ultrasonic Modules
-3x 56k Resistors
-1x KSP 2222A Transistor
-25x Connector Wires(More than necessary but good incase they become damaged)
-2x Breadboards
-1x Arduino Genuino Uno
-1x 8ohm 1.5w Speaker or basic Piezo Speaker will suffice
+* 2x HC-SR04 Virtuabotix Ultrasonic Modules
+* 3x 56k Resistors
+* 1x KSP 2222A Transistor
+* 25x Connector Wires(More than necessary but good incase they become damaged)
+* 2x Breadboards
+* 1x Arduino Genuino Uno
+* 1x 8ohm 1.5w Speaker or basic Piezo Speaker will suffice
 
 # Build Instructions
 * TO DO: Make thorough instructions
