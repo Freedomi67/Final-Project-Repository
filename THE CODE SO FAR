@@ -1,39 +1,35 @@
-#include <Ultrasonic.h>
+// Basic Arduino Theremin using Virtuabotix Ultrasonic Sensors
+int echoPin = 2;                                // digital 3 pin
+int initPin = 3;                                // digital 4 pin
+int speakerPin = 6;                       // Speaker pin on the right
+unsigned long pulseTime = 0;                    // Use to store pulse
+unsigned long distance = 0;                     // variable for storing the distance (cm) we'll use distance as a switch for the speaker
+unsigned long soundDelay = 0;                   // variable for storing the deay needed for the pitch
 
-const int soundPin = 6;
-int triggerPin =  AN1;
-int echoPin =     AN0;
-Ultrasonic ultrasonic(triggerPin, echoPin, BUSA);
+//setup
+void setup() {
 
-int readingValue;
-int frequency;
+  pinMode(speakerPin, OUTPUT);                  // sets pin 6 as output
+  pinMode(initPin, OUTPUT);                     // set init pin 3 as output
+  pinMode(echoPin, INPUT);                      // set echo pin 2 as input
 
+ } 
 
+// execute
+void loop() {
+  digitalWrite(initPin, HIGH);                  // send 10 microsecond pulse
+  delayMicroseconds(10);                        // wait 10 microseconds before turning off
+  digitalWrite(initPin, LOW);                   // stop sending the pulse
+  pulseTime = pulseIn(echoPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
+  distance = pulseTime/58;                      // convert the pulse into distance (cm)
+  soundDelay = pulseTime/3;                     // alter this variable to alter the pitch of the sound emitted
 
-void setup()
-  {
-  Serial.begin(9600);
+  // make the sound.
+  // check the distance, if over 30cm make no sound
+  if (distance < 30) {
+  digitalWrite(speakerPin, HIGH);
+  delayMicroseconds(soundDelay);
+  digitalWrite(speakerPin, LOW);
+  delayMicroseconds(soundDelay);
   }
-
-void loop()
-  {
-  float cmMsec, inMsec;
-  long microsec = ultrasonic.timing(500, Ultrasonic::IN);
-
-  cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
-  inMsec = ultrasonic.convert(microsec, Ultrasonic::IN);
-  Serial.print("MS: ");
-  Serial.print(microsec);
-  Serial.print(", CM: ");
-  Serial.print(cmMsec);
-  Serial.print(", IN: ");
-  Serial.println(inMsec);
-  delay(100);
-
-  readingValue = analogRead(microsec);
-
-  tone(soundPin, readingValue);
-  
-
-  
-  }
+}
