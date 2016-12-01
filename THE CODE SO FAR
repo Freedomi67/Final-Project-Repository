@@ -1,29 +1,53 @@
-// Basic Arduino Theremin using Virtuabotix Ultrasonic Sensors
-int echoPin = 2;                                // digital 3 pin
-int initPin = 3;                                // digital 4 pin
-int speakerPin = 6;                       // Speaker pin on the right
-unsigned long pulseTime = 0;                    // Use to store pulse
-unsigned long distance = 0;                     // variable for storing the distance (cm) we'll use distance as a switch for the speaker
-unsigned long soundDelay = 0;                   // variable for storing the deay needed for the pitch
+/CS207 Final Project 
+//Joseph Maciag
+//200301980
+// Arduino Theremin using Virtuabotix Ultrasonic Sensors
+
+#include <Ultrasonic.h> //Include the library for this. 
+
+
+// Declare Globals
+int echoRightPin = 2;                                // digital 3 pin
+int initRightPin = 3;                                // digital 4 pin
+int echoLeftPin = 5;                            //digital 5 pin
+int initLeftPin = 6;                            // digital 6 pin
+int speakerPin = 8;                             // Source for Sound
+unsigned long sonicWave = 0;                    // Used to store sonic wave for the right sensor
+unsigned long distance = 0;                     // Distance we will measure for the right sensor
+unsigned long soundDelay = 0;                   // We use this to determine the pitch for the right sensor
+unsigned long sonicWaveLeft = 0;                    // Used to store sonic wave for the right sensor
+unsigned long distanceLeft = 0;                     // Distance we will measure for the right sensor
+unsigned long soundLeftDelay = 0;                   // We use this to determine the pitch for the right sensor
+
 
 //setup
 void setup() {
 
   pinMode(speakerPin, OUTPUT);                  // sets pin 6 as output
-  pinMode(initPin, OUTPUT);                     // set init pin 3 as output
-  pinMode(echoPin, INPUT);                      // set echo pin 2 as input
+  
+  pinMode(initRightPin, OUTPUT);                     // set init pin 3 as output 
+  pinMode(echoRightPin, INPUT);                      // set echo pin 2 as input
 
  } 
 
 // execute
 void loop() {
-  digitalWrite(initPin, HIGH);                  // send 10 microsecond pulse
-  delayMicroseconds(10);                        // wait 10 microseconds before turning off
-  digitalWrite(initPin, LOW);                   // stop sending the pulse
-  pulseTime = pulseIn(echoPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
-  distance = pulseTime/58;                      // convert the pulse into distance (cm)
-  soundDelay = pulseTime/3;                     // alter this variable to alter the pitch of the sound emitted
+  digitalWrite(initRightPin, HIGH);                  // send 10 microsecond pulse
+  delayMicroseconds(3);                        // wait 10 microseconds before turning off
+  digitalWrite(initRightPin, LOW);                   // stop sending the pulse
+  sonicWave = pulseIn(echoRightPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
+  distance = sonicWave/60;                      // convert the pulse into distance (cm)
+  soundDelay = sonicWave/distanceLeft;                     // alter this variable to alter the pitch of the sound emitted
 
+  digitalWrite(initLeftPin, HIGH);                  // send 10 microsecond pulse
+  delayMicroseconds(3);                        // wait 10 microseconds before turning off
+  digitalWrite(initLeftPin, LOW);                   // stop sending the pulse
+  sonicWaveLeft = pulseIn(echoLeftPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
+  distanceLeft = sonicWave/60;                      // convert the pulse into distance (cm)
+  
+
+
+Serial.println(distance);
   // make the sound.
   // check the distance, if over 30cm make no sound
   if (distance < 30) {
@@ -32,4 +56,6 @@ void loop() {
   digitalWrite(speakerPin, LOW);
   delayMicroseconds(soundDelay);
   }
+
+  Serial.println(distance);
 }
