@@ -1,4 +1,4 @@
-/CS207 Final Project 
+//CS207 Final Project 
 //Joseph Maciag
 //200301980
 // Arduino Theremin using Virtuabotix Ultrasonic Sensors
@@ -28,6 +28,8 @@ void setup() {
   pinMode(initRightPin, OUTPUT);                     // set init pin 3 as output 
   pinMode(echoRightPin, INPUT);                      // set echo pin 2 as input
 
+  
+
  } 
 
 // execute
@@ -37,17 +39,10 @@ void loop() {
   digitalWrite(initRightPin, LOW);                   // stop sending the pulse
   sonicWave = pulseIn(echoRightPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
   distance = sonicWave/60;                      // convert the pulse into distance (cm)
-  soundDelay = sonicWave/distanceLeft;                     // alter this variable to alter the pitch of the sound emitted
-
-  digitalWrite(initLeftPin, HIGH);                  // send 10 microsecond pulse
-  delayMicroseconds(3);                        // wait 10 microseconds before turning off
-  digitalWrite(initLeftPin, LOW);                   // stop sending the pulse
-  sonicWaveLeft = pulseIn(echoLeftPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
-  distanceLeft = sonicWave/60;                      // convert the pulse into distance (cm)
+  soundDelay = sonicWave/25;                     // alter this variable to alter the pitch of the sound emitted
+ 
   
 
-
-Serial.println(distance);
   // make the sound.
   // check the distance, if over 30cm make no sound
   if (distance < 30) {
@@ -57,5 +52,4 @@ Serial.println(distance);
   delayMicroseconds(soundDelay);
   }
 
-  Serial.println(distance);
 }
