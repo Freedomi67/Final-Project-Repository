@@ -11,7 +11,6 @@ With this currenty build you will be able to get one of the sensors working. I h
 * /hardware - The amazing hardware.
 * /build - Here is the finished code.
 * /Libraries - The libraries used.
-* /examples - More than one way to run my code.
 * /img - Shots of my project.
 * /license - Feel free to use or add on to my project as you please! 
 * /README.md - What you are currently looking at.
