@@ -3,31 +3,31 @@
 //200301980
 // Arduino Theremin using Virtuabotix Ultrasonic Sensors
 
-#include <Ultrasonic.h> //Include the library for this. 
+#include <Ultrasonic.h> //Include the library for this. Never actually ended up using this library. Found my own way to get it to work.
 
 
 // Declare Globals
 int echoRightPin = 2;                                // digital 3 pin
 int initRightPin = 3;                                // digital 4 pin
-int echoLeftPin = 5;                            //digital 5 pin
-int initLeftPin = 6;                            // digital 6 pin
-int speakerPin = 8;                             // Source for Sound
-unsigned long sonicWave = 0;                    // Used to store sonic wave for the right sensor
-unsigned long distance = 0;                     // Distance we will measure for the right sensor
-unsigned long soundDelay = 0;                   // We use this to determine the pitch for the right sensor
-unsigned long sonicWaveLeft = 0;                    // Used to store sonic wave for the right sensor
-unsigned long distanceLeft = 0;                     // Distance we will measure for the right sensor
-unsigned long soundLeftDelay = 0;                   // We use this to determine the pitch for the right sensor
+int echoLeftPin = 5;                                //digital 5 pin
+int initLeftPin = 6;                                // digital 6 pin
+int speakerPin = 8;                                 // Source for Sound
+unsigned long sonicWave = 0;                         // Used to store sonic wave for the right sensor
+unsigned long distance = 0;                         // Distance we will measure for the right sensor
+unsigned long soundDelay = 0;                       // We use this to determine the pitch for the  speaker
+unsigned long sonicWaveLeft = 0;                    // Used to store sonic wave for the left sensor
+unsigned long distanceLeft = 0;                     // Distance we will measure for the left sensor
+unsigned long octaveLeftDelay = 0;                   // This is used to hold the value for the left sensor
 
 
 //setup
 void setup() {
 
-  pinMode(speakerPin, OUTPUT);                  // sets pin 6 as output
-  
+  pinMode(speakerPin, OUTPUT);                      // sets pin 8 as output
   pinMode(initRightPin, OUTPUT);                     // set init pin 3 as output 
   pinMode(echoRightPin, INPUT);                      // set echo pin 2 as input
-
+  pinMode(initLeftPin, OUTPUT);                     // set init pin 5 as output 
+  pinMode(echoLeftPin, INPUT);                      // set echo pin 6 as input
   
 
  } 
@@ -36,11 +36,18 @@ void setup() {
 void loop() {
   digitalWrite(initRightPin, HIGH);                  // send 10 microsecond pulse
   delayMicroseconds(3);                        // wait 10 microseconds before turning off
-  digitalWrite(initRightPin, LOW);                   // stop sending the pulse
+  digitalWrite(initRightPin, LOW);                   // Stop sending pulse
   sonicWave = pulseIn(echoRightPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
   distance = sonicWave/60;                      // convert the pulse into distance (cm)
-  soundDelay = sonicWave/25;                     // alter this variable to alter the pitch of the sound emitted
- 
+  soundDelay = sonicWave/25;                     // alter this variable to alter the pitch of the sound emitted (Replace /value with octaveLeftDelay for control of pitch)
+  
+  //digitalWrite(initLeftPin, HIGH);                  // send 10 microsecond pulse
+  //delayMicroseconds(3);                        // wait 10 microseconds before turning off
+  //digitalWrite(initLeftPin, LOW);                   // stop sending the pulse
+  //sonicWaveLeft = pulseIn(echoLeftPin, HIGH);           // Look for a return pulse, it should be high as the pulse goes low-high-low
+  //distanceLeft = sonicWaveLeft/60;                      // convert the pulse into distance (cm)
+  //octaveLeftDelay = sonicWaveLeft;                     // This takes the pulse length of the left sensor and translates it into a value
+  //soundDelay = sonicwave/octaveLeftDelay; 
   
 
   // make the sound.
