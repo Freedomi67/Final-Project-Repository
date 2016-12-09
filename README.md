@@ -6,14 +6,13 @@ For this project I will be using an Ultrasonic sensor to pick up a signal to out
 With this currenty build you will be able to get one of the sensors working. I have not yet quite figured out how to get the left sensor which determines the octave it will be played at working. 
 
 # Repository Contents 
-
-* /src - Here's the software for my device.
-* /hardware - The amazing hardware.
-* /build - Here is the finished code.
-* /Libraries - The libraries used.
-* /img - Shots of my project.
+* /THECODE - The Code
+* /The Build with Images - Images of the build
+* /References - Bilbliography 
 * /license - Feel free to use or add on to my project as you please! 
 * /README.md - What you are currently looking at.
+* /.gitattributes 
+* /.gitignore
 
 # Requirements and Materials
 
@@ -31,12 +30,10 @@ List of Materials needed
 * 1x Arduino Genuino Uno
 * 1x 8ohm 1.5w Speaker or basic Piezo Speaker will suffice
 
-# Build Instructions
-* TO DO: Make thorough instructions
 
 # Usage
-The right hand should control the volume of the frequency
-The left hand should control the pitch of the frequency
+* The right hand should control the volume of the frequency
+* The left hand should control the pitch of the frequency
 
 # Team
 The team behind this project consists of not many, but one man.
