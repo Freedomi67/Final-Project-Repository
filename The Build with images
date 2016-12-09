@@ -1,0 +1,5 @@
+![]({{site.baseurl}}//Theremin_bb.jpg)
+This is the schematic for the theremin. Yellow wires were used to connect to the pins, red is for the 5V power, black is ground, orange connects the speaker. The resistors in the diagram are 220ohm resistors but are actually 56ohm resistors. Fritzing didn't have smaller resistors in its libraries. 
+
+![]({{site.baseurl}}//15420786_10154840977509923_3858780921689811594_n.jpg)
+This is a picture of the product. The speakers are not connected but that is due to the wires being difficult. 
